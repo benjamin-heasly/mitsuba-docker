@@ -9,7 +9,7 @@ You can also consult this to figure out how to build Mitsuba.  The RUN commands 
 
 **Note**: The Mitsuba build with scons takes a while and a lot of memory.  You probably want a newish machine with 4GB+ of RAM.  Or run all of this on a beefy Amazon EC2 instance!
 
-For me (Ben) the build ran out of memory on an Amazon t2.micro instance.  On an m4.xlarge instance it succeeded in about xx minutes (starting at 3:30...work in progress...)
+For me (Ben) the build ran out of memory on an Amazon *t2.micro* instance.  On an *m4.xlarge* instance it succeeded after about 35 minutes.
 
 # Build the Docker image
 
