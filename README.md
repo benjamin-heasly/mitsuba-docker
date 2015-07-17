@@ -34,7 +34,7 @@ Here's how to launch a Docker container from the image, and get command line acc
 
 Since the `Dockerfile` is nearly self-contained, it would make a nice automated build on Docker Hub.  That way, you wouldn't have to build the image yourself.
 
-Unfortunately, the Mitsuba build with scons takes more memory than Docker Hub provisions for automated builds (I you get think 3GB).  So for now you just have to DIY.
+Unfortunately, the Mitsuba build with scons takes more memory than Docker Hub provisions for automated builds (I think you get 3GB).  So for now you just have to DIY.
 
 If you have a Docker Hub account, you can push up the image manually, then use it from anywhere.  That way, you only have to build the image once:
  - `sudo docker login`
