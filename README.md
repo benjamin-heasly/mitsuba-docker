@@ -12,6 +12,8 @@ You can also consult this to figure out how to build Mitsuba.  The RUN commands 
 Here's how to build the image in the first place:
  - [install Docker](https://docs.docker.com/installation/)
  - [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+   - on ubuntu: sudo apt-get install git
+   - on amazon linux: sudo yum install git
  - git clone https://github.com/benjamin-heasly/mitsuba-docker.git
  - cd mitsuba-docker
  - sudo docker build -t my-name/mitsuba-docker:latest .
