@@ -13,6 +13,8 @@ Note: the Mitsuba build with scons takes a while and a lot of memory.  You proba
 
 Here's how to build the image in the first place:
  - [install Docker](https://docs.docker.com/installation/)
+   - on ubuntu (might be out-dated): `sudo apt-get install docker docker.io`
+   - on amazon linux: `sudo yum install docker`
  - [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
    - on ubuntu: `sudo apt-get install git`
    - on amazon linux: `sudo yum install git`
