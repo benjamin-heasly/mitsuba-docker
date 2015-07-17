@@ -44,17 +44,13 @@ RUN apt-get update \
     && apt-get autoremove
 
 ### headless X server
+### this allows the Mitsba scene importer to use OpenGL for triagle computations
 ADD xorg.conf /etc/X11/xorg.conf
 RUN echo 'xpra start :0' > /etc/bash.bashrc
 ENV DISPLAY :0
 
-### get Mitsuba source
-RUN mkdir /home/rtb/mitsuba-src
-WORKDIR /home/rtb/mitsuba-src
-RUN hg clone --insecure https://www.mitsuba-renderer.org/hg/mitsuba
-
 ### build and install RBG Mitsuba
-WORKDIR /home/rtb/mitsuba-src/mitsuba
+RUN hg clone --insecure https://www.mitsuba-renderer.org/hg/mitsuba
 RUN cp build/config-linux-gcc.py config.py \
     && scons \
     && mkdir -p /home/rtb/mitsuba-rgb \
@@ -70,5 +66,3 @@ RUN sed -e 's/SPECTRUM_MIN_WAVELENGTH[ ^I]*[0-9]*$/SPECTRUM_MIN_WAVELENGTH   395
 RUN scons \
     && mkdir -p /home/rtb/mitsuba-multi \
     && cp -r dist/* /home/rtb/mitsuba-multi
-
-
