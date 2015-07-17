@@ -7,7 +7,9 @@ The `Dockerfile` in this repository represents a complete set of instructions fo
 
 You can also consult this to figure out how to build Mitsuba.  The RUN commands are thing you can run on the command line.  Some of them will require `sudo`.
 
-Note: the Mitsuba build with scons takes a while and a lot of memory.  You probably want a newish machine with 4+ GB of ram.  Or run all of this on a beefy Amazon EC2 instance!  That is what I (Ben) am doing. 
+**Note**: The Mitsuba build with scons takes a while and a lot of memory.  You probably want a newish machine with 4GB+ of RAM.  Or run all of this on a beefy Amazon EC2 instance!
+
+For me (Ben) the build ran out of memory on an Amazon t2.micro instance.  On an m4.xlarge instance it succeeded in about xx minutes (starting at 3:30...work in progress...)
 
 # Build the Docker image
 
