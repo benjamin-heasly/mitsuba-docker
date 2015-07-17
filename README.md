@@ -3,7 +3,7 @@ Dockerfile and instructions for building Mitsuba
 
 # Hi
 
-The `Dockerfile` in this repository represents a complete set of instructions for building Mitsuba on Ubunut.  You can use this to create a Docker image with Mitsuba in it
+The `Dockerfile` in this repository represents a complete set of instructions for building Mitsuba on Ubuntu.  You can use this to create a Docker image with Mitsuba in it.
 
 You can also consult this to figure out how to build Mitsuba.  The RUN commands are thing you can run on the command line.  Some of them will require `sudo`.
 
