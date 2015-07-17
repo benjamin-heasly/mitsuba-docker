@@ -2,49 +2,48 @@ FROM ubuntu:14.04
 
 MAINTAINER Ben Heasly <benjamin.heasly@gmail.com>
 
-### system dependencies
-RUN apt-get update \
-    && apt-get install -y\
+### mitsuba dependencies
+apt-get update \
+    && apt-get install -y \
     build-essential \
-    git \
+    scons \
+    mercurial \
+    qt4-dev-tools \
+    libpng12-dev \
+    libjpeg-dev \
+    libilmbase-dev \
+    libxerces-c-dev \
     libboost-all-dev \
+    libopenexr-dev \
+    libglewmx-dev \
+    libxxf86vm-dev \
+    libpcrecpp0 \
     libeigen3-dev \
     libfftw3-dev \
-    libglew-dev \
-    libglewmx-dev \
-    libilmbase-dev \
-    libjpeg8-dev \
-    libjpeg-dev \
-    libopenexr-dev \
-    libpcrecpp0 \
-    libpng12-dev \
-    libxerces-c3.1 \
-    libxerces-c-dev \
+    wget \
+    && apt-get clean \
+    && apt-get autoclean \
+    && apt-get autoremove
+
+RUN wget http://www.mitsuba-renderer.org/releases/current/trusty/collada-dom-dev_2.4.0-1_amd64.deb \
+    && wget http://www.mitsuba-renderer.org/releases/current/trusty/collada-dom_2.4.0-1_amd64.deb \
+    && dpkg --install collada-dom*.deb
+
+### headless X server dependencies
+RUN apt-get update \
+    && apt-get install -y \
     libx11-dev \
     libxxf86vm-dev \
-    mercurial \
-    mercurial-common \
-    python-pip \
-    qt4-dev-tools \
-    scons \
-    unzip \
-    wget \
     x11-xserver-utils \
     x11proto-xf86vidmode-dev \
     x11vnc \
     xpra \
     xserver-xorg-video-dummy \
-    zlib1g-dev \
     && apt-get clean \
     && apt-get autoclean \
     && apt-get autoremove
 
-### extra Mitsuba dependencies
-RUN wget http://www.mitsuba-renderer.org/releases/current/trusty/collada-dom-dev_2.4.0-1_amd64.deb \
-    && wget http://www.mitsuba-renderer.org/releases/current/trusty/collada-dom_2.4.0-1_amd64.deb \
-    && dpkg --install collada-dom*.deb
-
-### set up headless X server
+### headless X server
 ADD xorg.conf /etc/X11/xorg.conf
 RUN echo 'xpra start :0' > /etc/bash.bashrc
 ENV DISPLAY :0
