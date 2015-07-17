@@ -1,11 +1,13 @@
 # mitsuba-docker
 Dockerfile and instructions for building Mitsuba
 
-# Hi
+# Hi!
 
 The `Dockerfile` in this repository represents a complete set of instructions for building Mitsuba on Ubuntu.  You can use this to create a Docker image with Mitsuba in it.
 
 You can also consult this to figure out how to build Mitsuba.  The RUN commands are thing you can run on the command line.  Some of them will require `sudo`.
+
+Note: the Mitsuba build with scons takes a while and a lot of memory.  You probably want a newish machine with 4+ GB of ram.  Or run all of this on a beefy Amazon EC2 instance!  That is what I (Ben) am doing. 
 
 # Build the Docker image
 
@@ -30,6 +32,6 @@ Since the `Dockerfile` is nearly self-contained, it would make a nice automated 
 
 Unfortunately, the Mitsuba build with scons takes more memory than Docker Hub provisions for automated builds (I you get think 3GB).  So for now you just have to DIY.
 
-If you have a Docker Hub account, you can push up the image and reuse it anywhere.  That way, you only have to build the image once:
+If you have a Docker Hub account, you can push up the image manually, then use it from anywhere.  That way, you only have to build the image once:
  - `sudo docker login`
  - `sudo docker push my-name/mitsuba-docker:latest`
