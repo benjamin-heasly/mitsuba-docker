@@ -67,3 +67,9 @@ RUN sed -e 's/SPECTRUM_MIN_WAVELENGTH[ ^I]*[0-9]*$/SPECTRUM_MIN_WAVELENGTH   395
 RUN scons \
     && mkdir /mitsuba-multi \
     && cp -r dist/* /mitsuba-multi
+
+### make scripts for running each mitsuba flavor
+RUN echo "LD_LIBRARY_PATH=/mitsuba-multi /mitsuba-multi/mitsuba" > multi-mitsuba
+RUN echo "LD_LIBRARY_PATH=/mitsuba-multi /mitsuba-multi/mtsimport" > multi-mtsimport
+RUN echo "LD_LIBRARY_PATH=/mitsuba-rgb /mitsuba-rgb/mitsuba" > rgb-mitsuba
+RUN echo "LD_LIBRARY_PATH=/mitsuba-rgb /mitsuba-rgb/mtsimport" > rgb-mtsimport
