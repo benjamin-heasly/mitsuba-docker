@@ -30,6 +30,14 @@ Here's how to build the image in the first place:
 Here's how to launch a Docker container from the image, and get command line access:
  - `sudo docker run -t -i my-name/mitsuba-docker:latest "/bin/bash"`
 
+Once you're in, check that you can run multi-spectral and rgb mitsuba and mitsuba importer:
+```
+./multi-mitsuba
+./multi-mtsimport
+./rgb-mitsuba
+./rgb-mtsimport
+```
+
 # Automated Docker Hub builds?
 
 Since the `Dockerfile` is nearly self-contained, it would make a nice automated build on Docker Hub.  That way, you wouldn't have to build the image yourself.
