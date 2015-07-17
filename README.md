@@ -22,7 +22,7 @@ Here's how to build the image in the first place:
 # Run the Docker image
 
 Here's how to launch a Docker container from the image, and get command line access:
- - sudo docker run -t -i my-name/mitsuba-docker:latest "/bin/bash"
+ - `sudo docker run -t -i my-name/mitsuba-docker:latest "/bin/bash"`
 
 # Automated Docker Hub builds?
 
@@ -31,5 +31,5 @@ Since the `Dockerfile` is nearly self-contained, it would make a nice automated 
 Unfortunately, the Mitsuba build with scons takes more memory than Docker Hub provisions for automated builds (I you get think 3GB).  So for now you just have to DIY.
 
 If you have a Docker Hub account, you can push up the image and reuse it anywhere.  That way, you only have to build the image once:
- - sudo docker login
- - sudo docker push my-name/mitsuba-docker:latest
+ - `sudo docker login`
+ - `sudo docker push my-name/mitsuba-docker:latest`
