@@ -3,7 +3,7 @@ FROM ubuntu:14.04
 MAINTAINER Ben Heasly <benjamin.heasly@gmail.com>
 
 ### mitsuba dependencies
-apt-get update \
+RUN apt-get update \
     && apt-get install -y \
     build-essential \
     scons \
@@ -51,10 +51,11 @@ ENV DISPLAY :0
 
 ### build and install RBG Mitsuba
 RUN hg clone --insecure https://www.mitsuba-renderer.org/hg/mitsuba
+WORKDIR mitsuba
 RUN cp build/config-linux-gcc.py config.py \
     && scons \
-    && mkdir -p /home/rtb/mitsuba-rgb \
-    && cp -r dist/* /home/rtb/mitsuba-rgb
+    && mkdir /mitsuba-rgb \
+    && cp -r dist/* /mitsuba-rgb
 
 ### edit mitsuba source and config for 31 spectrum bands in 395-705nm
 RUN sed 's/SAMPLES=[0-9]*/SAMPLES=31/' build/config-linux-gcc.py > config.py
@@ -64,5 +65,5 @@ RUN sed -e 's/SPECTRUM_MIN_WAVELENGTH[ ^I]*[0-9]*$/SPECTRUM_MIN_WAVELENGTH   395
 
 ### build and install multispectral Mitsuba
 RUN scons \
-    && mkdir -p /home/rtb/mitsuba-multi \
-    && cp -r dist/* /home/rtb/mitsuba-multi
+    && mkdir /mitsuba-multi \
+    && cp -r dist/* /mitsuba-multi
