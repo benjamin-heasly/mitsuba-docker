@@ -1,7 +1,7 @@
 # mitsuba-docker
 Dockerfile and instructions for building Mitsuba
 
-# Hi!
+# Hello!
 
 The `Dockerfile` in this repository represents a complete set of instructions for building Mitsuba on Ubuntu.  You can use this to create a Docker image with Mitsuba in it.
 
