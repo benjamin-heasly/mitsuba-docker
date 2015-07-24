@@ -69,11 +69,14 @@ RUN scons \
     && cp -r dist/* /mitsuba-multi
 
 ### make scripts for running each mitsuba flavor
-RUN echo "LD_LIBRARY_PATH=/mitsuba-multi /mitsuba-multi/mitsuba" > multi-mitsuba \
-    && chmod +x multi-mitsuba
-RUN echo "LD_LIBRARY_PATH=/mitsuba-multi /mitsuba-multi/mtsimport" > multi-mtsimport \
-    && chmod +x multi-mtsimport
-RUN echo "LD_LIBRARY_PATH=/mitsuba-rgb /mitsuba-rgb/mitsuba" > rgb-mitsuba \
-    && chmod +x rgb-mitsuba
-RUN echo "LD_LIBRARY_PATH=/mitsuba-rgb /mitsuba-rgb/mtsimport" > rgb-mtsimport \
-    && chmod +x rgb-mtsimport
+WORKDIR /usr/local/bin
+RUN echo "LD_LIBRARY_PATH=/mitsuba-multi /mitsuba-multi/mitsuba" > mitsuba-multi \
+    && chmod +x mitusba-multi
+RUN echo "LD_LIBRARY_PATH=/mitsuba-multi /mitsuba-multi/mtsimport" > mtsimport-multi \
+    && chmod +x mtsimport-multi
+RUN echo "LD_LIBRARY_PATH=/mitsuba-rgb /mitsuba-rgb/mitsuba" > mitsuba-rgb \
+    && chmod +x mitsuba-rgb
+RUN echo "LD_LIBRARY_PATH=/mitsuba-rgb /mitsuba-rgb/mtsimport" > mtsimport-rgb \
+    && chmod +x mtsimport-rgb
+
+WORKDIR /home/docker
