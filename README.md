@@ -15,7 +15,7 @@ For me (Ben) the build ran out of memory on an Amazon *t2.micro* instance.  On a
 
 Here's how to build the image in the first place:
  - [install Docker](https://docs.docker.com/installation/)
-   - on ubuntu (might be out-dated): `sudo apt-get install docker docker.io`
+   - on ubuntu (might be out-dated, here is an [alternative](https://github.com/DavidBrainard/RenderToolboxDevelop/wiki/Matlab-on-Docker-and-EC2#ssh-to-ec2-instance-and-install-docker-with-support-for-large-containers)): `sudo apt-get install docker docker.io`
    - on amazon linux: `sudo yum install docker`
  - `sudo service docker start`
  - [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
