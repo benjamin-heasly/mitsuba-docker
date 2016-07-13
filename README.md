@@ -3,45 +3,40 @@ Dockerfile and instructions for building Mitsuba
 
 # Hello!
 
-The `Dockerfile` in this repository represents a complete set of instructions for building Mitsuba on Ubuntu.  You can use this to create a Docker image with Mitsuba in it.
+The `Dockerfile` in this repository represents a complete set of instructions for [mitsuba](https://www.mitsuba-renderer.org/) on Ubuntu.  You can use this to create a Docker image with Mitsuba in it.
 
 You can also consult this to figure out how to build Mitsuba.  The RUN commands are thing you can run on the command line.  Some of them will require `sudo`.
 
-**Note**: The Mitsuba build with scons takes a while and a lot of memory.  You probably want a newish machine with 4GB+ of RAM.  Or run all of this on a beefy Amazon EC2 instance!
+The build comes in two flavors.  `/rgb` builds Mitsuba in standard RGB mode.  `/spectral` builds Mitsuba with 31 spectrum slices in the range 395nm-405nm.
 
-For me (Ben) the build ran out of memory on an Amazon *t2.micro* instance.  On an *m4.xlarge* instance it succeeded after about 35 minutes.
+# Get the Docker Image
 
-# Build the Docker image
+This Docker images are is hosted on DockerHub.  See [rgb](https://hub.docker.com/r/ninjaben/mitsuba-rgb/) and [spectral](https://hub.docker.com/r/ninjaben/mitsuba-spectral/).  You can obtain them locally with:
+```
+sudo docker pull ninjaben/mitsuba-rgb
+sudo docker pull ninjaben/mitsuba-spectral
+```
 
-Here's how to build the image in the first place:
- - [install Docker](https://docs.docker.com/installation/)
-   - on ubuntu (might be out-dated, here is an [alternative](https://github.com/DavidBrainard/RenderToolboxDevelop/wiki/Matlab-on-Docker-and-EC2#ssh-to-ec2-instance-and-install-docker-with-support-for-large-containers)): `sudo apt-get install docker docker.io`
-   - on amazon linux: `sudo yum install docker`
- - `sudo service docker start`
- - [install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-   - on ubuntu: `sudo apt-get install git`
-   - on amazon linux: `sudo yum install git`
- - `git clone https://github.com/benjamin-heasly/mitsuba-docker.git`
- - `cd mitsuba-docker`
- - `sudo docker build -t my-name/mitsuba-docker:latest .`
+Or you can build them yourself from the Dockerfile:
+```
+git clone https://github.com/benjamin-heasly/mitsuba-docker.git
+cd mitsuba-docker
+sudo docker build -t your-name/mitsuba-rgb/ ./rgb
+sudo docker build -t your-name/mitsuba-spectral/ ./spectral
+```
 
-# Run the Docker image
+# Run a Docker Container
 
-Here's how to launch a Docker container from the image, and get command line access:
- - `sudo docker run -t -i my-name/mitsuba-docker:latest "/bin/bash"`
+You can launch a Docker container from one of these images and use it just like a Mitsuba executable:
+```
+sudo docker run -ti ninjaben/mitsuba-rgb mitsuba -h
+# or
+sudo docker run -ti ninjaben/mitsuba-spectral mitsuba -h
+```
 
-Once you're in, check that you can run multi-spectral and rgb mitsuba and mitsuba importer:
- - `mitsuba-multi`
- - `mmtsimport-multi`
- - `mitsuba-rgb`
- - `mmtsimport-rgb`
-
-# Automated Docker Hub builds?
-
-Since the `Dockerfile` is nearly self-contained, it would make a nice automated build on Docker Hub.  That way, you wouldn't have to build the image yourself.
-
-Unfortunately, the Mitsuba build with scons takes more memory than Docker Hub provisions for automated builds (I think you get 3GB).  So for now you just have to DIY.
-
-If you have a Docker Hub account, you can push up the image manually, then use it from anywhere.  That way, you only have to build the image once:
- - `sudo docker login`
- - `sudo docker push my-name/mitsuba-docker:latest`
+To give the container access to your Mitsuba scene files, mount in the current folder as a temporary volume:
+```
+sudo docker run -ti --rm -v `pwd`:`pwd` ninjaben/mitsuba-rgb mitsuba myScene.xml
+# or
+sudo docker run -ti --rm -v `pwd`:`pwd` ninjaben/mitsuba-spectral mitsuba myScene.xml
+```
