@@ -11,7 +11,7 @@ The build comes in two flavors.  `/rgb` builds Mitsuba in standard RGB mode.  `/
 
 # Get the Docker Image
 
-This Docker images are is hosted on DockerHub.  See [rgb](https://hub.docker.com/r/ninjaben/mitsuba-rgb/) and [spectral](https://hub.docker.com/r/ninjaben/mitsuba-spectral/).  You can obtain them locally with:
+This Docker images are hosted on DockerHub.  See [rgb](https://hub.docker.com/r/ninjaben/mitsuba-rgb/) and [spectral](https://hub.docker.com/r/ninjaben/mitsuba-spectral/).  You can obtain them locally with:
 ```
 sudo docker pull ninjaben/mitsuba-rgb
 sudo docker pull ninjaben/mitsuba-spectral
