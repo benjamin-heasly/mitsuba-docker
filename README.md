@@ -1,7 +1,7 @@
 # mitsuba-docker
 Dockerfile and instructions for building Mitsuba
 
-# Hi!
+# Hello!
 
 The `Dockerfile` in this repository represents a complete set of instructions for building Mitsuba on Ubuntu.  You can use this to create a Docker image with Mitsuba in it.
 
@@ -31,10 +31,10 @@ Here's how to launch a Docker container from the image, and get command line acc
  - `sudo docker run -t -i my-name/mitsuba-docker:latest "/bin/bash"`
 
 Once you're in, check that you can run multi-spectral and rgb mitsuba and mitsuba importer:
- - `./multi-mitsuba`
- - `./multi-mtsimport`
- - `./rgb-mitsuba`
- - `./rgb-mtsimport`
+ - `mitsuba-multi`
+ - `mmtsimport-multi`
+ - `mitsuba-rgb`
+ - `mmtsimport-rgb`
 
 # Automated Docker Hub builds?
 
