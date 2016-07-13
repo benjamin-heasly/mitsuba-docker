@@ -21,8 +21,8 @@ Or you can build them yourself from the Dockerfile:
 ```
 git clone https://github.com/benjamin-heasly/mitsuba-docker.git
 cd mitsuba-docker
-sudo docker build -t your-name/mitsuba-rgb/ ./rgb
-sudo docker build -t your-name/mitsuba-spectral/ ./spectral
+sudo docker build -t your-name/mitsuba-rgb ./rgb
+sudo docker build -t your-name/mitsuba-spectral ./spectral
 ```
 
 # Run a Docker Container
