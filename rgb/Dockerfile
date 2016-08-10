@@ -57,7 +57,9 @@ WORKDIR /mitsuba/mitsuba
 RUN cp build/config-linux-gcc.py config.py \
     && scons
 
-### set up Mitsuba libs and path before running any given commands
-COPY mitsuba-entrypoint.sh /
-ENTRYPOINT ["/mitsuba-entrypoint.sh"]
+### set up Mitsuba lib and bin paths, like in Mitsuba's own setpath.sh
+ENV MITSUBA_DIR /mitsuba/mitsuba
+ENV PYTHONPATH /mitsuba/mitsuba/dist/python:/mitsuba/mitsuba/dist/python/2.7:
+ENV PATH /mitsuba/mitsuba/dist:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV LD_LIBRARY_PATH /mitsuba/mitsuba/dist:
 
