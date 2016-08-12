@@ -16,12 +16,6 @@ RUN apt-get update \
     && apt-get autoclean \
     && apt-get autoremove
 
-### headless X server
-### this allows the Mitsba scene importer "mtsimport" to use OpenGL for triagle computations
-COPY xorg.conf /etc/X11/xorg.conf
-RUN echo 'xpra start :0' > /etc/bash.bashrc
-ENV DISPLAY :0
-
 ### mitsuba dependencies
 RUN apt-get update \
     && apt-get install -y \
@@ -62,4 +56,13 @@ ENV MITSUBA_DIR /mitsuba/mitsuba
 ENV PYTHONPATH /mitsuba/mitsuba/dist/python:/mitsuba/mitsuba/dist/python/2.7:
 ENV PATH /mitsuba/mitsuba/dist:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV LD_LIBRARY_PATH /mitsuba/mitsuba/dist:
+
+### configure headless X server
+### this allows the Mitsba scene importer "mtsimport" to use OpenGL for triagle computations
+COPY xorg.conf /etc/X11/xorg.conf
+ENV DISPLAY :0
+
+### start the X server on entry 
+COPY ./headless-entrypoint.sh /
+ENTRYPOINT ["/headless-entrypoint.sh"]
 
