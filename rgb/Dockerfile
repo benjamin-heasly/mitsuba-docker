@@ -54,7 +54,7 @@ RUN cp build/config-linux-gcc.py config.py \
 ### set up Mitsuba lib and bin paths, like in Mitsuba's own setpath.sh
 ENV MITSUBA_DIR /mitsuba/mitsuba
 ENV PYTHONPATH /mitsuba/mitsuba/dist/python:/mitsuba/mitsuba/dist/python/2.7:
-ENV PATH /mitsuba/mitsuba/dist:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH /mitsuba/mitsuba/wrapper:/mitsuba/mitsuba/dist:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV LD_LIBRARY_PATH /mitsuba/mitsuba/dist:
 
 ### configure headless X server
@@ -62,7 +62,6 @@ ENV LD_LIBRARY_PATH /mitsuba/mitsuba/dist:
 COPY xorg.conf /etc/X11/xorg.conf
 ENV DISPLAY :0
 
-### start the X server on entry 
-COPY ./headless-entrypoint.sh /
-ENTRYPOINT ["/headless-entrypoint.sh"]
+### wrapper to start headless xserver when using mtsimport 
+COPY ./mtsimport-headless.sh /mitsuba/mitsuba/wrapper/mtsimport
 
