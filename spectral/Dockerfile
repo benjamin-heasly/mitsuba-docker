@@ -1,6 +1,6 @@
-FROM ninjaben/mitsuba-rgb
+FROM marceliwac/mitsuba-rgb
 
-MAINTAINER Ben Heasly <benjamin.heasly@gmail.com>
+LABEL authors="Ben Heasly <benjamin.heasly@gmail.com>, Marceli Wac <marceliwac@gmail.com>"
 
 WORKDIR /mitsuba/mitsuba
 
@@ -12,4 +12,3 @@ RUN sed -e 's/SPECTRUM_MIN_WAVELENGTH[ ^I]*[0-9]*$/SPECTRUM_MIN_WAVELENGTH   395
 
 ### replace previous rgb build with new spectral build
 RUN scons
-
