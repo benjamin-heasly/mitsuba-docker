@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-MAINTAINER Ben Heasly <benjamin.heasly@gmail.com>
+LABEL authors="Ben Heasly <benjamin.heasly@gmail.com>, Marceli Wac <marceliwac@gmail.com>"
 
 ### headless X server dependencies
 RUN apt-get update \
@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get install -y \
     build-essential \
     scons \
-    mercurial \
+    git \
     qt4-dev-tools \
     libpng12-dev \
     libjpeg-dev \
@@ -46,7 +46,8 @@ RUN wget http://www.mitsuba-renderer.org/releases/current/trusty/collada-dom-dev
     && dpkg --install collada-dom*.deb
 
 ### build Mitsuba
-RUN hg clone --insecure https://www.mitsuba-renderer.org/hg/mitsuba
+RUN git clone https://www.github.com/mitsuba-renderer/mitsuba.git
+RUN cd mitsuba && git checkout 2f9bf64cb49c2b4c1c945e73c50c1c0da9507add && cd ..
 WORKDIR /mitsuba/mitsuba
 RUN cp build/config-linux-gcc.py config.py \
     && scons
@@ -62,6 +63,5 @@ ENV LD_LIBRARY_PATH /mitsuba/mitsuba/dist:
 COPY xorg.conf /etc/X11/xorg.conf
 ENV DISPLAY :0
 
-### wrapper to start headless xserver when using mtsimport 
+### wrapper to start headless xserver when using mtsimport
 COPY ./mtsimport-headless.sh /mitsuba/mitsuba/wrapper/mtsimport
-
