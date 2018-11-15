@@ -1,4 +1,4 @@
-FROM marceliwac/mitsuba-rgb
+FROM ninjaben/mitsuba-rgb
 
 LABEL authors="Ben Heasly <benjamin.heasly@gmail.com>, Marceli Wac <marceliwac@gmail.com>"
 
