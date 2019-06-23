@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-LABEL authors="Ben Heasly <benjamin.heasly@gmail.com>, Marceli Wac <marceliwac@gmail.com>"
+LABEL authors="Ben Heasly <benjamin.heasly@gmail.com>, Marceli Wac <marceliwac@gmail.com>, Aaryaman Vasishta <jem456.vasishta@gmail.com>"
 
 ### headless X server dependencies
 RUN apt-get update \
@@ -47,7 +47,7 @@ RUN wget http://www.mitsuba-renderer.org/releases/current/trusty/collada-dom-dev
 
 ### build Mitsuba
 RUN git clone https://www.github.com/mitsuba-renderer/mitsuba.git
-RUN cd mitsuba && git checkout 2f9bf64cb49c2b4c1c945e73c50c1c0da9507add && cd ..
+RUN cd mitsuba && git checkout 0be165de401485f934872d0d548e3655bba1b7c8 && cd ..
 WORKDIR /mitsuba/mitsuba
 RUN cp build/config-linux-gcc.py config.py \
     && scons
@@ -65,3 +65,9 @@ ENV DISPLAY :0
 
 ### wrapper to start headless xserver when using mtsimport
 COPY ./mtsimport-headless.sh /mitsuba/mitsuba/wrapper/mtsimport
+
+### Hack to get it to work on some clusters which report locale issues
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8
